@@ -1,0 +1,432 @@
+/* =====================================================
+   Portal Conecta Carreiras 2.0 - css/estilo.css
+   Um único CSS usado pelas 4 páginas.
+   Ideia visual: o portal é um "mapa de linhas de metrô":
+   cada passo da carreira é uma estação conectada.
+   ===================================================== */
+
+/* ---------- 1. VARIÁVEIS (CSS variables) ---------- */
+:root {
+  --cor-primaria: #3b2fd9;        /* azul-violeta: botões e links */
+  --cor-primaria-escura: #241a9c; /* hover dos botões */
+  --cor-destaque: #ff7a1a;        /* laranja: linha do metrô, foco, selo */
+  --cor-menta: #12b886;           /* verde: segundo selo e detalhes */
+  --cor-tinta: #14183b;           /* texto principal e fundos escuros */
+  --cor-suave: #444a73;           /* texto secundário */
+  --cor-papel: #f1f3fc;           /* fundo da página */
+  --cor-branco: #ffffff;
+  --raio: 14px;
+  --sombra: 0 2px 8px rgba(20, 24, 59, 0.12);
+}
+
+/* ---------- 2. BASE / RESET ---------- */
+* { box-sizing: border-box; }  /* Box Model: width inclui padding e borda */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Verdana, sans-serif;
+  background: var(--cor-papel);
+  color: var(--cor-tinta);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 1em; }
+a { color: var(--cor-primaria); }
+
+/* Foco visível para quem navega pelo teclado (acessibilidade) */
+:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 3px;
+}
+
+/* Link "pular para o conteúdo": só aparece ao apertar Tab */
+.pular-conteudo {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--cor-branco);
+  padding: 8px 16px;
+  z-index: 10;
+}
+.pular-conteudo:focus { left: 0; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.secao { padding: 64px 0; }
+
+/* ---------- 3. CABEÇALHO E MENU (Flexbox) ---------- */
+.topo {
+  background: var(--cor-branco);
+  border-bottom: 4px solid var(--cor-primaria);
+}
+.topo .container {
+  display: flex;
+  justify-content: space-between;  /* logo à esquerda, menu à direita */
+  align-items: center;
+  gap: 16px;
+  min-height: 76px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--cor-tinta);
+  text-decoration: none;
+}
+/* Marca: duas estações ligadas por uma linha */
+.logo-marca {
+  position: relative;
+  flex: none;               /* não deixa o Flexbox encolher a marca */
+  width: 48px;
+  height: 16px;
+  background: linear-gradient(var(--cor-primaria), var(--cor-primaria)) center / 100% 4px no-repeat;
+}
+.logo-marca::before,
+.logo-marca::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 4px solid var(--cor-primaria);
+  background: var(--cor-branco);
+}
+.logo-marca::before { left: 0; }
+.logo-marca::after { right: 0; border-color: var(--cor-destaque); }
+
+.menu {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu a {
+  display: block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--cor-tinta);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.menu a:hover { background: var(--cor-papel); }
+.menu a[aria-current="page"] {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+}
+
+/* ---------- 4. BOTÕES ---------- */
+.botao {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: 12px 26px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  /* transition no seletor BASE: anima na ida e na volta do hover */
+  transition: background 0.3s, transform 0.3s;
+}
+.botao:hover {
+  background: var(--cor-primaria-escura);
+  transform: translateY(-2px);
+}
+.botao-destaque {
+  background: var(--cor-destaque);
+  color: var(--cor-tinta);
+  padding: 15px 32px;
+  font-size: 1.1rem;
+}
+.botao-destaque:hover { background: #ff9447; }
+
+/* ---------- 5. HERO (página inicial) ---------- */
+.hero {
+  background: var(--cor-tinta);
+  color: var(--cor-branco);
+  padding: 80px 0;
+}
+.hero .container {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+}
+.hero-texto { flex: 1.2; }
+.hero-texto p {
+  max-width: 46ch;
+  font-size: 1.15rem;
+  color: #d9ddf5;  /* contraste alto sobre o fundo escuro */
+  margin-bottom: 1.6em;
+}
+
+/* A "linha de metrô": lista ordenada com borda laranja e estações */
+.linha {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 30px;
+  border-left: 6px solid var(--cor-destaque);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.linha li {
+  position: relative;
+  color: #d9ddf5;
+}
+.linha li::before {
+  content: "";
+  position: absolute;
+  left: -48px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--cor-tinta);
+  border: 6px solid var(--cor-branco);
+}
+.linha li:last-child::before { border-color: var(--cor-menta); }
+.linha strong {
+  display: block;
+  color: var(--cor-branco);
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 1.3rem;
+}
+
+/* ---------- 6. BENEFÍCIOS (Flexbox) ---------- */
+.beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}
+.beneficio {
+  flex: 1 1 240px;
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  border-top: 6px solid var(--cor-menta);
+  padding: 28px;
+  box-shadow: var(--sombra);
+}
+.beneficio p { margin: 0; color: var(--cor-suave); }
+
+.chamada {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  text-align: center;
+  padding: 56px 0;
+}
+.chamada p { font-size: 1.1rem; }
+
+/* ---------- 7. TÍTULO DAS PÁGINAS INTERNAS ---------- */
+.titulo-pagina {
+  background: var(--cor-branco);
+  padding: 48px 0 40px;
+  border-bottom: 1px solid #d5d9ee;
+}
+.titulo-pagina p {
+  max-width: 60ch;
+  color: var(--cor-suave);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ---------- 8. CARDS DE OPORTUNIDADES (Grid) ---------- */
+/* auto-fit + minmax: o navegador decide quantas colunas cabem.
+   min(280px, 100%) evita estourar a largura em telas muito pequenas. */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 24px;
+}
+.card {
+  position: relative;            /* referência para o selo (absolute) */
+  display: flex;
+  flex-direction: column;
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: transform 0.3s, box-shadow 0.3s;  /* no base, não só no :hover */
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(20, 24, 59, 0.22);
+}
+.card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;             /* imagem preenche sem deformar */
+}
+.card-corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+  padding: 20px;
+}
+.card-corpo h2 { font-size: 1.2rem; margin: 0; }
+.card-corpo p { color: var(--cor-suave); margin: 0 0 12px; }
+.categoria {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+.card .botao {
+  margin-top: auto;              /* empurra o botão para o fim do card */
+  align-self: flex-start;
+}
+
+/* Selos (badges): saem do fluxo e não empurram o resto do card */
+.selo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--cor-destaque);
+  color: var(--cor-tinta);
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+.selo-menta { background: var(--cor-menta); }
+
+.aviso {
+  margin-top: 32px;
+  color: var(--cor-suave);
+  font-size: 0.95rem;
+}
+
+/* ---------- 9. SOBRE ---------- */
+.sobre {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.sobre-imagem { flex: 1; border-radius: var(--raio); box-shadow: var(--sombra); }
+.sobre-texto { flex: 1.2; }
+.sobre-texto ul { padding-left: 1.2em; color: var(--cor-suave); }
+.sobre-texto li { margin-bottom: 0.5em; }
+
+/* ---------- 10. CONTATO E FORMULÁRIO ---------- */
+.contato {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+.contato-info { flex: 1; }
+.contato-info p { color: var(--cor-suave); }
+
+.formulario {
+  flex: 1.5;
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  padding: 32px;
+  box-shadow: var(--sombra);
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.campo label { font-weight: 700; }
+.campo input,
+.campo select,
+.campo textarea {
+  font: inherit;
+  color: var(--cor-tinta);
+  background: var(--cor-branco);
+  padding: 12px;
+  border: 2px solid #8f95c4;
+  border-radius: 8px;
+}
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: 3px solid var(--cor-destaque);
+  border-color: var(--cor-primaria);
+}
+.campo textarea { min-height: 140px; resize: vertical; }
+.campo-check {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+.campo-check input { width: 22px; height: 22px; margin-top: 3px; }
+.campo-check label { font-weight: 400; }
+.nota { font-size: 0.9rem; color: var(--cor-suave); }
+
+/* ---------- 11. RODAPÉ ---------- */
+.rodape {
+  background: var(--cor-tinta);
+  color: #d9ddf5;
+  padding: 32px 0;
+  font-size: 0.95rem;
+  text-align: center;   /* texto do rodapé centralizado */
+}
+.rodape p { margin: 0; }
+.rodape p + p { margin-top: 4px; }
+.rodape .rodape-nome {
+  color: var(--cor-branco);
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* =====================================================
+   12. RESPONSIVIDADE (Media Queries)
+   ===================================================== */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .hero { padding: 56px 0; }
+  .hero .container,
+  .sobre { flex-direction: column; align-items: stretch; }
+  .linha { margin-top: 16px; }
+  .menu a { padding: 8px 12px; }
+  .secao { padding: 48px 0; }
+}
+
+/* Celular */
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+  .topo .container {
+    flex-direction: column;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .menu { flex-wrap: wrap; justify-content: center; }
+  .beneficios { flex-direction: column; }
+  .contato { flex-direction: column; align-items: stretch; }
+  .formulario { padding: 20px; }
+  .botao-destaque { display: block; text-align: center; }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-hidden="true">
+<rect width="600" height="400" fill="#3b2fd9"/>
+<polyline points="0,320 180,320 260,240 600,240" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="14" stroke-linejoin="round"/>
+<circle cx="180" cy="320" r="18" fill="#3b2fd9" stroke="#fff" stroke-width="8"/>
+<circle cx="520" cy="240" r="18" fill="#ff7a1a" stroke="#fff" stroke-width="8"/>
+<text x="300" y="195" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, sans-serif" font-weight="800" font-size="170" fill="#ffffff">CC</text>
+</svg>
