@@ -18,6 +18,3 @@ Use a navegação para consultar as páginas Início, Oportunidades, Sobre e Con
 
 Praticar HTML semântico, navegação entre páginas, CSS responsivo e acessibilidade básica.
 
-## Publicar com GitHub Pages
-
-Em **Settings → Pages**, escolha **Deploy from a branch**, selecione `main` e `/(root)`. Depois do primeiro deploy, o site ficará em https://thiagorodrigues07.github.io/conecta-carreiras/.
